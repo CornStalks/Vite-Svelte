@@ -17,6 +17,10 @@ function test(){
   test1 +=1
 }
 
+function less(){
+  test1 -=1
+}
+
 let YourName = "" // Btw doulbe quotes ("") is a string!
 </script>
 
@@ -56,4 +60,9 @@ Add one child to your basement</button>
 
 Free a child (why would u?) </button>
 
-<button on:click={test}
+<p>{test1}</p>
+
+<button on:click={test} on:contextmenu|preventDefault={less}>
+No 
+</button>
+
