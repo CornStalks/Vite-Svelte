@@ -1,5 +1,48 @@
 <script>
 
+function placeholder(){
+
+}
+
+//This is for Electron Clicker//
+let Protoncost = 50
+let Nuetroncost = 500
+let Nuetronprotoncost = 10
+let Electronperclick = 1
+let Electron = 0
+let Proton = 0
+let Nuetron = 0
+
+function click(){
+  Electron = ((Electron) + Electronperclick)
+}
+
+function buyProton(){
+if(Electron >=50){
+Protoncost *= 1.2
+Proton += 1
+Electron -= 50
+Electronperclick += 0.1
+}
+}
+
+function buyNuetron(){
+  if(Electron >=500 , Proton >=10){
+    Nuetroncost *= 1.25
+    Nuetronprotoncost *= 1.25
+    Nuetron += 1
+    Proton -= 10
+    Electron -= 500
+    Electronperclick += 2
+  }
+}
+
+
+
+
+
+
+//This is for other sturf//
 let test1 = 0
 
 let randomnumber = 0
@@ -66,3 +109,25 @@ Free a child (why would u?) </button>
 No 
 </button>
 
+<p></p>
+<!--This next section is all for Electron Clicker-->
+
+<p>Electrons Per Click: {Electronsperclick}</p>
+
+<button on:click={click} on:contextmenu|preventDefault={placeholder}>
+Electrons: {Electron.toFixed(1)} <p></p>
+Protons: {Proton} <p></p>
+Nuetrons: {Nuetron}
+</button>
+
+
+<button on:click={buyProton} on:contextmenu|preventDefault={placeholder}>
+Buy Proton
+Cost: {Protoncost.toFixed(0.1)} Electrons
+</button>
+
+<button on:click={buyNuetron} on:contextmenu|preventDefault={placeholder}>
+Buy a Nuetron
+Cost: {Nuetroncost.toFixed(0.1)} Electrons, {Nuetronprotoncost.toFixed(0.1)} Protons
+
+</button>
