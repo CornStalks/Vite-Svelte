@@ -1,7 +1,7 @@
 <script>
-
+let e = 0
 function placeholder(){
-
+e -= 1
 }
 
 //This is for Electron Clicker//
@@ -12,32 +12,41 @@ let Electronperclick = 1
 let Electron = 0
 let Proton = 0
 let Nuetron = 0
-
+let Oxygencost = 8000
+let Oxygenprotoncost = 80
+let Oxygennuetroncost = 8
 function click(){
-  Electron = ((Electron) + Electronperclick)
+  Electron = (((Electron) + Electronperclick) *100) /100 
 }
 
 function buyProton(){
-if(Electron >=50){
+if(Electron >=Protoncost){
+  Electron -= Protoncost
 Protoncost *= 1.2
 Proton += 1
-Electron -= 50
 Electronperclick += 0.1
 }
 }
 
 function buyNuetron(){
-  if(Electron >=500 , Proton >=10){
+  if(Electron >=Nuetroncost , Proton >=Nuetronprotoncost){
+   Proton -= Nuetronprotoncost
+    Electron -= Nuetroncost
     Nuetroncost *= 1.25
     Nuetronprotoncost *= 1.25
     Nuetron += 1
-    Proton -= 10
-    Electron -= 500
     Electronperclick += 2
   }
 }
 
-
+function buyOxygen(){
+  if(Electron >=Oxygencost , Proton >=Oxygenprotoncost , Nuetron >=Oxygennuetroncost){
+    Proton -= Oxygenprotoncost
+    Electron -= Oxygencost
+    Nuetron -= Oxygennuetroncost
+    Electronperclick *= 2
+  }
+}
 
 
 
@@ -112,7 +121,11 @@ No
 <p></p>
 <!--This next section is all for Electron Clicker-->
 
-<p>Electrons Per Click: {Electronsperclick}</p>
+<button on:click={devtools} on:contextmenu|preventDefault={placeholder}>
+Devtools
+</button>
+
+<p>Electrons Per Click: {Electronperclick.toFixed(1)}   </p>
 
 <button on:click={click} on:contextmenu|preventDefault={placeholder}>
 Electrons: {Electron.toFixed(1)} <p></p>
@@ -123,11 +136,11 @@ Nuetrons: {Nuetron}
 
 <button on:click={buyProton} on:contextmenu|preventDefault={placeholder}>
 Buy Proton
-Cost: {Protoncost.toFixed(0.1)} Electrons
+Cost: {Protoncost.toFixed(1)} Electrons
 </button>
 
 <button on:click={buyNuetron} on:contextmenu|preventDefault={placeholder}>
 Buy a Nuetron
-Cost: {Nuetroncost.toFixed(0.1)} Electrons, {Nuetronprotoncost.toFixed(0.1)} Protons
+Cost: {Nuetroncost.toFixed(1)} Electrons, {Nuetronprotoncost.toFixed(1)} Protons
 
 </button>
