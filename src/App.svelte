@@ -15,6 +15,11 @@ let Nuetron = 0
 let Oxygencost = 8000
 let Oxygenprotoncost = 80
 let Oxygennuetroncost = 8
+
+function devtools(){
+Electron += 1000
+}
+
 function click(){
   Electron = (((Electron) + Electronperclick) *100) /100 
 }
@@ -121,7 +126,7 @@ No
 <p></p>
 <!--This next section is all for Electron Clicker-->
 
-<button on:click={devtools} on:contextmenu|preventDefault={placeholder}>
+<button on:click={devtools} on:contextmenu|preventDefault={less}>
 Devtools
 </button>
 
