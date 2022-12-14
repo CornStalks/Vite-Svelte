@@ -8,7 +8,7 @@ e -= 1
 let Protoncost = 50
 let Nuetroncost = 500
 let Nuetronprotoncost = 10
-let Electronperclick = 1
+let Electronperclick = (Proton)+(Nuetron*5)+(Oxygen)
 let Electron = 0
 let Proton = 0
 let Nuetron = 0
@@ -17,7 +17,7 @@ let Oxygenprotoncost = 80
 let Oxygennuetroncost = 8
 
 function devtools(){
-Electron += 1000
+Electron += 100000
 }
 
 function click(){
@@ -27,9 +27,8 @@ function click(){
 function buyProton(){
 if(Electron >=Protoncost){
   Electron -= Protoncost
-Protoncost *= 1.2
+Protoncost *= 1.1
 Proton += 1
-Electronperclick += 0.1
 }
 }
 
@@ -37,10 +36,9 @@ function buyNuetron(){
   if(Electron >=Nuetroncost , Proton >=Nuetronprotoncost){
    Proton -= Nuetronprotoncost
     Electron -= Nuetroncost
-    Nuetroncost *= 1.25
-    Nuetronprotoncost *= 1.25
+    Nuetroncost *= 1.1
+    Nuetronprotoncost *= 1.1
     Nuetron += 1
-    Electronperclick += 2
   }
 }
 
@@ -49,7 +47,6 @@ function buyOxygen(){
     Proton -= Oxygenprotoncost
     Electron -= Oxygencost
     Nuetron -= Oxygennuetroncost
-    Electronperclick *= 2
   }
 }
 
@@ -134,8 +131,8 @@ Devtools
 
 <button on:click={click} on:contextmenu|preventDefault={placeholder}>
 Electrons: {Electron.toFixed(1)} <p></p>
-Protons: {Proton} <p></p>
-Nuetrons: {Nuetron}
+Protons: {Proton.toFixed(1)} <p></p>
+Nuetrons: {Nuetron.toFixed(1)}
 </button>
 
 
