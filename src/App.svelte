@@ -5,19 +5,34 @@ e -= 1
 }
 
 //This is for Electron Clicker//
+let AutoClicker = 0
 let Protoncost = 50
 let Nuetroncost = 500
-let Nuetronprotoncost = 10
-let Electronperclick = (Proton)+(Nuetron*5)+(Oxygen)
+let Nuetronprotoncost = 5
 let Electron = 0
 let Proton = 0
 let Nuetron = 0
+let Oxygen = 0
 let Oxygencost = 8000
-let Oxygenprotoncost = 80
-let Oxygennuetroncost = 8
+let Oxygenprotoncost = 5
+let Oxygennuetroncost = 5
+
+$: Electronperclick = 1 + 0.5 * Proton + 2 * Nuetron + 15 * Oxygen
 
 function devtools(){
-Electron += 100000
+Electron += 100000000
+}
+
+function range(max) {
+  return Array(max).fill()
+}
+
+setInterval(Autolicker, 33399999999999999)
+
+function Autolicker(){
+  for (const _ in range(Autolicker)) {
+    click()
+  }
 }
 
 function click(){
@@ -25,8 +40,8 @@ function click(){
 }
 
 function buyProton(){
-if(Electron >=Protoncost){
-  Electron -= Protoncost
+if(Electron >=~~Protoncost){
+  Electron -= ~~Protoncost
 Protoncost *= 1.1
 Proton += 1
 }
@@ -34,8 +49,8 @@ Proton += 1
 
 function buyNuetron(){
   if(Electron >=Nuetroncost , Proton >=Nuetronprotoncost){
-   Proton -= Nuetronprotoncost
-    Electron -= Nuetroncost
+   Proton -= ~~Nuetronprotoncost
+    Electron -= ~~Nuetroncost
     Nuetroncost *= 1.1
     Nuetronprotoncost *= 1.1
     Nuetron += 1
@@ -44,9 +59,10 @@ function buyNuetron(){
 
 function buyOxygen(){
   if(Electron >=Oxygencost , Proton >=Oxygenprotoncost , Nuetron >=Oxygennuetroncost){
-    Proton -= Oxygenprotoncost
-    Electron -= Oxygencost
-    Nuetron -= Oxygennuetroncost
+    Proton -= ~~Oxygenprotoncost
+    Electron -= ~~Oxygencost
+    Nuetron -= ~~Oxygennuetroncost
+    Oxygen += 1
   }
 }
 
@@ -135,14 +151,20 @@ Protons: {Proton.toFixed(1)} <p></p>
 Nuetrons: {Nuetron.toFixed(1)}
 </button>
 
+<p></p>
 
 <button on:click={buyProton} on:contextmenu|preventDefault={placeholder}>
 Buy Proton
-Cost: {Protoncost.toFixed(1)} Electrons
+Cost: {~~Protoncost} Electrons
 </button>
 
 <button on:click={buyNuetron} on:contextmenu|preventDefault={placeholder}>
-Buy a Nuetron
-Cost: {Nuetroncost.toFixed(1)} Electrons, {Nuetronprotoncost.toFixed(1)} Protons
+Buy Nuetron
+Cost: {~~Nuetroncost} Electrons, {~~Nuetronprotoncost} Protons
 
+</button>
+
+<button on:click={buyOxygen} on:contextmenu|preventDefault={placeholder}>
+Buy Oxygen
+Cost: {~~Oxygencost} Electrons, {~~Oxygenprotoncost} Protons, {~~Oxygennuetroncost} Nuetrons
 </button>
